@@ -22,8 +22,8 @@ position = Vector2(879, 157)
 position = Vector2(1130, 158)
 
 [node name="TextEdit" type="TextEdit" parent="."]
-offset_left = 868.0
-offset_top = 386.00003
-offset_right = 919.08813
-offset_bottom = 394.00003
+offset_left = 866.99994
+offset_top = 386.0
+offset_right = 918.0881
+offset_bottom = 394.0
 scale = Vector2(-12.805373, 23.263617)

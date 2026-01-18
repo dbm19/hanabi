@@ -28,11 +28,16 @@ func _ready() -> void:
 		_render_card(Singleton.player_information[player_index].Hand[i], i)
 	
 	_assess_cards()
-	_generate_number_hints(ones)
-	_generate_number_hints(twos)
-	_generate_number_hints(threes)
-	_generate_number_hints(fours)
-	_generate_number_hints(fives)
+	_generate_number_hints(ones, 1)
+	_generate_number_hints(twos, 2)
+	_generate_number_hints(threes, 3)
+	_generate_number_hints(fours, 4)
+	_generate_number_hints(fives, 5)
+	_generate_colour_hints(whites, "White")
+	_generate_colour_hints(reds, "Red")
+	_generate_colour_hints(greens, "Green")
+	_generate_colour_hints(blues, "Blue")
+	_generate_colour_hints(yellows, "Yellow")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -134,21 +139,46 @@ func _assess_cards() -> void:
 	print(ones, twos, threes, fours, fives)
 	print(whites, reds, blues, greens, yellows)
 	
-func _generate_number_hints(number) -> void:
+func _generate_number_hints(numbers_array, number) -> void:
 	var hints_for_number
 	var hints_string = ""
 	
-	for i in range(number.size()):
-		if number.size() > 1:
-			if i != number.size() - 1:
-				hints_string += str(number[i] + 1) + ", "
+	for i in range(numbers_array.size()):
+		if numbers_array.size() > 1:
+			if i != numbers_array.size() - 1:
+				hints_string += str(numbers_array[i] + 1) + ", "
 			else:
-				hints_string += "and " + str(number[i] + 1) 
-		elif number.size() == 1:
-			hints_string += str(number[i] + 1)
-	if number.size() != 1:
-		hints_for_number = "Cards " + hints_string + " are 1's"
+				hints_string += "and " + str(numbers_array[i] + 1) 
+		elif numbers_array.size() == 1:
+			hints_string += str(numbers_array[i] + 1)
+	if numbers_array.size() > 1:
+		hints_for_number = "Cards " + hints_string + " are " + str(number)
+		print(hints_for_number)
+	elif numbers_array.size() == 1:
+		hints_for_number = "Card " + hints_string + " is a " + str(number)
+		print(hints_for_number)
 	else:
-		hints_for_number = "Card " + hints_string + " is a 1"
+		hints_for_number = "There are no " + str(number) + "'s"
+
+func _generate_colour_hints(colours_array, colour) -> void:
+	var hints_for_colour
+	var hints_string = ""
 	
-	print(hints_for_number)
+	for i in range(colours_array.size()):
+		if colours_array.size() > 1:
+			if i != colours_array.size() - 1:
+				hints_string += str(colours_array[i] + 1) + ", "
+			else:
+				hints_string += "and " + str(colours_array[i] + 1) 
+		elif colours_array.size() == 1:
+			hints_string += str(colours_array[i] + 1)
+	if colours_array.size() > 1:
+		hints_for_colour = "Cards " + hints_string + " are " + str(colour)
+		print(hints_for_colour)
+	elif colours_array.size() == 1:
+		hints_for_colour = "Card " + hints_string + " is a " + str(colour)
+		print(hints_for_colour)
+	else:
+		hints_for_colour = "There are no " + str(colour) + "'s"
+	
+	
