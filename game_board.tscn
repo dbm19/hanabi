@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://do0tuktsew6md"]
+
+[ext_resource type="Script" uid="uid://bam6dtuu2pyy" path="res://game_board.gd" id="1_i37i2"]
+[ext_resource type="PackedScene" uid="uid://x0k2bhbol1po" path="res://card.tscn" id="1_xrvgy"]
+
+[node name="GameBoard" type="Node2D"]
+script = ExtResource("1_i37i2")
+
+[node name="Card" parent="." instance=ExtResource("1_xrvgy")]
+position = Vector2(124, 156)
+
+[node name="Card2" parent="." instance=ExtResource("1_xrvgy")]
+position = Vector2(377, 158)
+
+[node name="Card3" parent="." instance=ExtResource("1_xrvgy")]
+position = Vector2(628, 157)
+
+[node name="Card4" parent="." instance=ExtResource("1_xrvgy")]
+position = Vector2(879, 157)
+
+[node name="Card5" parent="." instance=ExtResource("1_xrvgy")]
+position = Vector2(1130, 158)
+
+[node name="TextEdit" type="TextEdit" parent="."]
+offset_left = 868.0
+offset_top = 386.00003
+offset_right = 919.08813
+offset_bottom = 394.00003
+scale = Vector2(-12.805373, 23.263617)
