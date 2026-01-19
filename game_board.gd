@@ -1,7 +1,8 @@
 extends Node2D
 
 var player_index = 1
-var card_scene_array = []
+var card_position_array = []
+var card_scene
 var hand = Singleton.player_information[player_index].Hand
 var ones = []
 var twos = []
@@ -16,17 +17,18 @@ var yellows = []
 var hints_box
 var list_of_hints = []
 
-# Preload the scene resource
+# Preload the scenes resource
 const CONTROL_SCENE: PackedScene = preload("res://control.tscn")
+const CARD_SCENE: PackedScene = preload("res://card.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	card_scene_array = [
-		get_node("Card/CardSprite"),
-		get_node("Card2/CardSprite"),
-		get_node("Card3/CardSprite"),
-		get_node("Card4/CardSprite"),
-		get_node("Card5/CardSprite")
+	card_position_array = [
+		get_node("Card1Position"),
+		get_node("Card2Position"),
+		get_node("Card3Position"),
+		get_node("Card4Position"),
+		get_node("Card5Position")
 	]
 	
 	# Get nodes
@@ -57,58 +59,61 @@ func _process(delta: float) -> void:
 	pass
 
 func _render_card(card, i) -> void:
+	card_scene = CARD_SCENE.instantiate()
 	match card:
 		"1_g":
-			card_scene_array[i].texture = load("res://green_one_card.png")
+			card_scene.get_node("CardSprite").texture = load("res://green_one_card.png")
 		"2_g":
-			card_scene_array[i].texture = load("res://green_two_card.png")
+			card_scene.get_node("CardSprite").texture = load("res://green_two_card.png")
 		"3_g":
-			card_scene_array[i].texture = load("res://green_three_card.png")
+			card_scene.get_node("CardSprite").texture = load("res://green_three_card.png")
 		"4_g":
-			card_scene_array[i].texture = load("res://green_four_card.png")
+			card_scene.get_node("CardSprite").texture = load("res://green_four_card.png")
 		"5_g":
-			card_scene_array[i].texture = load("res://green_five_card.png")
+			card_scene.get_node("CardSprite").texture =  load("res://green_five_card.png")
 		"1_b":
-			card_scene_array[i].texture = load("res://blue_one_card.png")
+			card_scene.get_node("CardSprite").texture = load("res://blue_one_card.png")
 		"2_b":
-			card_scene_array[i].texture = load("res://blue_two_card.png")
+			card_scene.get_node("CardSprite").texture = load("res://blue_two_card.png")
 		"3_b":
-			card_scene_array[i].texture = load("res://blue_three_card.png")
+			card_scene.get_node("CardSprite").texture = load("res://blue_three_card.png")
 		"4_b":
-			card_scene_array[i].texture = load("res://blue_four_card.png")
+			card_scene.get_node("CardSprite").texture = load("res://blue_four_card.png")
 		"5_b":
-			card_scene_array[i].texture = load("res://blue_five_card.png")
+			card_scene.get_node("CardSprite").texture = load("res://blue_five_card.png")
 		"1_r":
-			card_scene_array[i].texture = load("res://red_one_card.png")
+			card_scene.get_node("CardSprite").texture = load("res://red_one_card.png")
 		"2_r":
-			card_scene_array[i].texture = load("res://red_two_card.png")
+			card_scene.get_node("CardSprite").texture = load("res://red_two_card.png")
 		"3_r":
-			card_scene_array[i].texture = load("res://red_three_card.png")
+			card_scene.get_node("CardSprite").texture = load("res://red_three_card.png")
 		"4_r":
-			card_scene_array[i].texture = load("res://red_four_card.png")
+			card_scene.get_node("CardSprite").texture = load("res://red_four_card.png")
 		"5_r":
-			card_scene_array[i].texture = load("res://red_five_card.png")
+			card_scene.get_node("CardSprite").texture = load("res://red_five_card.png")
 		"1_w":
-			card_scene_array[i].texture = load("res://white_one_card.png")
+			card_scene.get_node("CardSprite").texture = load("res://white_one_card.png")
 		"2_w":
-			card_scene_array[i].texture = load("res://white_two_card.png")
+			card_scene.get_node("CardSprite").texture = load("res://white_two_card.png")
 		"3_w":
-			card_scene_array[i].texture = load("res://white_three_card.png")
+			card_scene.get_node("CardSprite").texture = load("res://white_three_card.png")
 		"4_w":
-			card_scene_array[i].texture = load("res://white_four_card.png")
+			card_scene.get_node("CardSprite").texture = load("res://white_four_card.png")
 		"5_w":
-			card_scene_array[i].texture = load("res://white_five_card.png")
+			card_scene.get_node("CardSprite").texture = load("res://white_five_card.png")
 		"1_y":
-			card_scene_array[i].texture = load("res://yellow_one_card.png")
+			card_scene.get_node("CardSprite").texture = load("res://yellow_one_card.png")
 		"2_y":
-			card_scene_array[i].texture = load("res://yellow_two_card.png")
+			card_scene.get_node("CardSprite").texture = load("res://yellow_two_card.png")
 		"3_y":
-			card_scene_array[i].texture = load("res://yellow_three_card.png")
+			card_scene.get_node("CardSprite").texture = load("res://yellow_three_card.png")
 		"4_y":
-			card_scene_array[i].texture = load("res://yellow_four_card.png")
+			card_scene.get_node("CardSprite").texture = load("res://yellow_four_card.png")
 		"5_y":
-			card_scene_array[i].texture = load("res://yellow_five_card.png")
+			card_scene.get_node("CardSprite").texture = load("res://yellow_five_card.png")
 
+	card_position_array[i].add_child(card_scene)
+	
 func _assess_cards() -> void:
 	hand = Singleton.player_information[player_index].Hand
 	ones = []

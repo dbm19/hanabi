@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://do0tuktsew6md"]
+[gd_scene load_steps=2 format=3 uid="uid://do0tuktsew6md"]
 
 [ext_resource type="Script" uid="uid://bam6dtuu2pyy" path="res://game_board.gd" id="1_i37i2"]
-[ext_resource type="PackedScene" uid="uid://x0k2bhbol1po" path="res://card.tscn" id="1_xrvgy"]
 
 [node name="GameBoard" type="Node2D"]
 script = ExtResource("1_i37i2")
@@ -12,20 +11,20 @@ offset_top = 319.0
 offset_right = 52.0
 offset_bottom = 342.0
 
-[node name="Card" parent="." instance=ExtResource("1_xrvgy")]
-position = Vector2(124, 156)
-
-[node name="Card2" parent="." instance=ExtResource("1_xrvgy")]
-position = Vector2(377, 158)
-
-[node name="Card3" parent="." instance=ExtResource("1_xrvgy")]
-position = Vector2(628, 157)
-
-[node name="Card4" parent="." instance=ExtResource("1_xrvgy")]
-position = Vector2(879, 157)
-
-[node name="Card5" parent="." instance=ExtResource("1_xrvgy")]
-position = Vector2(1130, 158)
-
 [node name="HintsPosition" type="Node2D" parent="."]
 position = Vector2(27, 338)
+
+[node name="Card1Position" type="Node2D" parent="."]
+position = Vector2(127, 153)
+
+[node name="Card2Position" type="Node2D" parent="."]
+position = Vector2(375, 159)
+
+[node name="Card3Position" type="Node2D" parent="."]
+position = Vector2(627, 157)
+
+[node name="Card4Position" type="Node2D" parent="."]
+position = Vector2(880, 158)
+
+[node name="Card5Position" type="Node2D" parent="."]
+position = Vector2(1130, 160)
