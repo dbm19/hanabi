@@ -45,6 +45,8 @@ var deck = [
 	"4_g","4_g",
 	"5_g",
 ]
+var number_of_clock_tokens = 8
+var number_of_black_fuse_tokens = 4
 var list_of_hints = []
 
 # Called when the node enters the scene tree for the first time.
