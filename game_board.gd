@@ -13,6 +13,11 @@ var greens = []
 var blues = []
 var whites = []
 var yellows = []
+var hints_box
+var list_of_hints = []
+
+# Preload the scene resource
+const CONTROL_SCENE: PackedScene = preload("res://control.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,20 +29,28 @@ func _ready() -> void:
 		get_node("Card5/CardSprite")
 	]
 	
+	# Get nodes
+	var hints_position_node = get_node("HintsPosition")
+	hints_box = get_node("Hints")
+
 	for i in range(Singleton.player_information[player_index].Hand.size()):
 		_render_card(Singleton.player_information[player_index].Hand[i], i)
 	
 	_assess_cards()
-	_generate_number_hints(ones, 1)
-	_generate_number_hints(twos, 2)
-	_generate_number_hints(threes, 3)
-	_generate_number_hints(fours, 4)
-	_generate_number_hints(fives, 5)
-	_generate_colour_hints(whites, "White")
-	_generate_colour_hints(reds, "Red")
-	_generate_colour_hints(greens, "Green")
-	_generate_colour_hints(blues, "Blue")
-	_generate_colour_hints(yellows, "Yellow")
+	Singleton.list_of_hints.append(_generate_number_hints(ones, 1))
+	Singleton.list_of_hints.append(_generate_number_hints(twos, 2))
+	Singleton.list_of_hints.append(_generate_number_hints(threes, 3))
+	Singleton.list_of_hints.append(_generate_number_hints(fours, 4))
+	Singleton.list_of_hints.append(_generate_number_hints(fives, 5))
+	Singleton.list_of_hints.append(_generate_colour_hints(whites, "White"))
+	Singleton.list_of_hints.append(_generate_colour_hints(reds, "Red"))
+	Singleton.list_of_hints.append(_generate_colour_hints(greens, "Green"))
+	Singleton.list_of_hints.append(_generate_colour_hints(blues, "Blue"))
+	Singleton.list_of_hints.append(_generate_colour_hints(yellows, "Yellow"))
+	print(Singleton.list_of_hints)
+	
+	var control_instance = CONTROL_SCENE.instantiate()
+	hints_position_node.add_child(control_instance)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -139,7 +152,7 @@ func _assess_cards() -> void:
 	print(ones, twos, threes, fours, fives)
 	print(whites, reds, blues, greens, yellows)
 	
-func _generate_number_hints(numbers_array, number) -> void:
+func _generate_number_hints(numbers_array, number) -> String:
 	var hints_for_number
 	var hints_string = ""
 	
@@ -153,14 +166,15 @@ func _generate_number_hints(numbers_array, number) -> void:
 			hints_string += str(numbers_array[i] + 1)
 	if numbers_array.size() > 1:
 		hints_for_number = "Cards " + hints_string + " are " + str(number)
-		print(hints_for_number)
+		return(hints_for_number)
 	elif numbers_array.size() == 1:
 		hints_for_number = "Card " + hints_string + " is a " + str(number)
-		print(hints_for_number)
+		return(hints_for_number)
 	else:
 		hints_for_number = "There are no " + str(number) + "'s"
+		return("")
 
-func _generate_colour_hints(colours_array, colour) -> void:
+func _generate_colour_hints(colours_array, colour) -> String:
 	var hints_for_colour
 	var hints_string = ""
 	
@@ -174,11 +188,11 @@ func _generate_colour_hints(colours_array, colour) -> void:
 			hints_string += str(colours_array[i] + 1)
 	if colours_array.size() > 1:
 		hints_for_colour = "Cards " + hints_string + " are " + str(colour)
-		print(hints_for_colour)
+		return(hints_for_colour)
 	elif colours_array.size() == 1:
 		hints_for_colour = "Card " + hints_string + " is a " + str(colour)
-		print(hints_for_colour)
+		return(hints_for_colour)
 	else:
 		hints_for_colour = "There are no " + str(colour) + "'s"
-	
+		return("")
 	

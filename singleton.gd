@@ -45,6 +45,7 @@ var deck = [
 	"4_g","4_g",
 	"5_g",
 ]
+var list_of_hints = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
